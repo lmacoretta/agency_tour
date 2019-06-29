@@ -1,4 +1,8 @@
+require('dotenv').config();
 import app from '../server/app';
+
+/** Config */
+require('./database');
 
 /** Server */
 app.set('port', process.env.PORT || 4000);
