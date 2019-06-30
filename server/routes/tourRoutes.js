@@ -9,6 +9,10 @@ import {
   deleteTour
 } from '../controllers/tourControllers';
 
+import { aliasTopTours } from '../middleware/routeMiddelware';
+
+router.route('/top-5-cheap').get(aliasTopTours, getAllTour);
+
 router
   .route('/')
   .get(getAllTour)

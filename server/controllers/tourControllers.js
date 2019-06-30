@@ -15,7 +15,36 @@ module.exports = {
         match => `$${match}`
       );
 
-      const query = Tour.find(JSON.parse(queryString));
+      let query = Tour.find(JSON.parse(queryString));
+
+      /** Filtro por sort */
+      if (req.query.sort) {
+        const sortBy = req.query.sort.split(',').join(' ');
+        query = query.sort(sortBy);
+      } else {
+        query = query.sort('-createdAt');
+      }
+
+      /** Filtro por fields */
+      if (req.query.fields) {
+        const fields = req.query.fields.split(',').join(' ');
+        query = query.select(fields); //Selecciono esos campos.
+      } else {
+        query = query.select('-__v'); //Excluyo el __v que usa mongo internamente.
+      }
+
+      /** Paginacion */
+      const page = req.query.page * 1 || 1; //req.query.page * 1 transforma una string a num
+      const limit = req.query.limit * 1 || 100;
+      const skip = (page - 1) * limit;
+
+      query = query.skip(skip).limit(limit);
+
+      if (req.query.page) {
+        const numTours = await Tour.countDocuments(); //Cuenta los doc
+        if (req.query.page >= numTours)
+          throw new Error('Esta pagina no existe');
+      }
 
       /** Envio la query */
       const tour = await query;

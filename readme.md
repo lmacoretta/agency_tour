@@ -6,3 +6,7 @@ En caso que queramos filtrar por sort, limit, etc, la ruta va recortar esto y va
 Tambien podemos aplicar filtros mas avanzado por ejemplo mas grande que X elemento. Por ejemplo /api/v1/tours?duration[gte]=5&difficulty=easy En este caso va traer los que sean de duracion mas grande que 5 y que la dificulta sea facil.
 
 Filtros avanzados serian: gte, gt, lte, lt.
+gte: greater than or equal.
+gt: greater than.
+lte: less than or equal.
+lt: less than.

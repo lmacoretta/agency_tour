@@ -28,7 +28,7 @@ const tourSchema = new Schema({
     required: [true, 'La excursion debe tener una dificultad']
   },
 
-  ratingAverage: {
+  ratingsAverage: {
     type: Number,
     default: 4.5
   },
@@ -65,7 +65,8 @@ const tourSchema = new Schema({
 
   createAt: {
     type: Date,
-    default: Date.now()
+    default: Date.now(),
+    select: false
   },
 
   startDates: [Date]
