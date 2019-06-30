@@ -33,7 +33,7 @@ const tourSchema = new Schema({
     default: 4.5
   },
 
-  ratingQuantity: {
+  ratingsQuantity: {
     type: Number,
     default: 0
   },

@@ -6,12 +6,18 @@ import {
   createTour,
   getTourById,
   updateTour,
-  deleteTour
+  deleteTour,
+  getTourStats,
+  getMonthlyPlan
 } from '../controllers/tourControllers';
 
 import { aliasTopTours } from '../middleware/routeMiddelware';
 
 router.route('/top-5-cheap').get(aliasTopTours, getAllTour);
+
+router.route('/tour-stats').get(getTourStats);
+
+router.route('/montly-plan/:year').get(getMonthlyPlan);
 
 router
   .route('/')
