@@ -8,4 +8,4 @@ mongoose
     `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
     { useNewUrlParser: true }
   )
-  .then(db => console.log('Base de datos conectada'));
+  .then(() => console.log('Base de datos conectada'));
