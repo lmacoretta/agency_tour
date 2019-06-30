@@ -3,10 +3,28 @@ import Tour from '../models/tourModel';
 module.exports = {
   getAllTour: async (req, res, next) => {
     try {
-      const tour = await Tour.find();
+      /** Filtro la query */
+      const queryObj = { ...req.query };
+      const excludeFields = ['page', 'sort', 'limit', 'fields'];
+      excludeFields.forEach(el => delete queryObj[el]);
 
+      /** Filtro mas avanzado */
+      let queryString = JSON.stringify(queryObj);
+      queryString = queryString.replace(
+        /\b(gte|gt|lte|lt)\b/g,
+        match => `$${match}`
+      );
+
+      const query = Tour.find(JSON.parse(queryString));
+
+      /** Envio la query */
+      const tour = await query;
+
+      /** Respuesta */
       res.status(200).json({
         data: {
+          status: 'success',
+          results: tour.length,
           tour
         }
       });
