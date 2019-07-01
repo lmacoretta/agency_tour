@@ -1,5 +1,5 @@
 require('dotenv').config();
-import app from '../server/app';
+const app = require('../server/app');
 
 /** Config */
 require('./database');

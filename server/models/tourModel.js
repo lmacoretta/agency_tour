@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
@@ -7,7 +7,16 @@ const tourSchema = new Schema({
     type: String,
     required: [true, 'La excursion debe tener un nombre'],
     unique: true,
-    trim: true
+    trim: true,
+    maxlength: [
+      40,
+      'El nombre de la excursion debe estar en 40 o mas caracteres'
+    ],
+    minlength: [
+      10,
+      'El nombre de la excursion debe tener minimo 10 o mas caracteres'
+    ]
+    //validate: [validator.isAlpha, 'El nombre de la excursion solo debe contener caracteres']
   },
 
   duration: {
@@ -25,12 +34,18 @@ const tourSchema = new Schema({
 
   difficulty: {
     type: String,
-    required: [true, 'La excursion debe tener una dificultad']
+    required: [true, 'La excursion debe tener una dificultad'],
+    enum: {
+      values: ['easy', 'medium', 'difficult'],
+      message: 'La dificultad tiene que ser Easy, Medium o Difficult'
+    }
   },
 
   ratingsAverage: {
     type: Number,
-    default: 4.5
+    default: 4.5,
+    min: [1, 'El rating minimo no puede ser menor a 1.0'],
+    max: [5, 'El rating maximo no pude ser mayor a 5.0']
   },
 
   ratingsQuantity: {
@@ -43,7 +58,18 @@ const tourSchema = new Schema({
     required: [true, 'La excursion debe tener un precio']
   },
 
-  priceDiscount: Number,
+  priceDiscount: {
+    type: Number,
+    validate: {
+      validator: function(val) {
+        //Solo funciona cuando se crea un nuevo tour y no en update.
+        return val < this.price;
+      },
+
+      message:
+        'El precio del descuento ({VALUE}) debe ser menor al precio de la excursion'
+    }
+  },
 
   summary: {
     type: String,

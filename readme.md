@@ -1,6 +1,6 @@
 Documentacion:
 
-- GET - <b>api/v1/tours</b>
+- <b>GET - api/v1/tours</b>
   Esta ruta trae todos los tours. Tambien podemos filtrar segun las caracteristicas que tiene un tour, por ejemplo por su duration, difficulty, price, etc.
   A su vez, podemos filtrar por sort, limit y fields.
 
@@ -18,3 +18,25 @@ Filtros avanzados serian: gte, gt, lte, lt.
 - gt: greater than.
 - lte: less than or equal.
 - lt: less than.
+
+- <b>GET - /api/v1/tours/montly-plan/2021</b>
+  Esta ruta calcula el numero de tours por mes que va haber durante el 2021. Esta echo con mongoose pipeline.
+
+Nos va devolver:
+
+- El numero de tours que tiene ese mes.
+- Los nombres de los tours.
+- El numero del mes.
+
+- <b>GET - /api/v1/tours/tour-stats</b>
+  Esta ruta tira una estadistica de los tours segun el nivel de dificultad. Tambien filtra por el ratingsAverage que sea mayor a 4.5
+
+Nos va devolver:
+
+- El id con el nivel de dificultad. Easy, medium o dificulty.
+- El numero de tours que hay en esa dificultad.
+- El numero de ratings que tiene los tours en esa difucultad.
+- El promedio del rating de los tours en esa dificultad.
+- El precio promedio de los tours.
+- El precio mas barato de todos los tours en esa dificultad.
+- El precio mas caro de todos los tours en esa dificultad.
