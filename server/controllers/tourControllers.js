@@ -1,6 +1,7 @@
 import Tour from '../models/tourModel';
 import APIFeatures from '../helpers/apiFeatures';
 import { catchAsync } from '../helpers/routeHelpers';
+const AppError = require('../middleware/appError');
 
 module.exports = {
   getAllTour: catchAsync(async (req, res, next) => {
@@ -26,6 +27,12 @@ module.exports = {
   getTourById: catchAsync(async (req, res, next) => {
     const tour = await Tour.findById(req.params.id);
 
+    if (!tour) {
+      return next(
+        new AppError('No se encuentra una excursion con ese id', 404)
+      );
+    }
+
     res.status(200).json({
       data: {
         tour
@@ -49,6 +56,12 @@ module.exports = {
       new: true,
       runValidators: true
     });
+
+    if (!tour) {
+      return next(
+        new AppError('No se encuentra una excursion con ese id', 404)
+      );
+    }
 
     res.status(200).json({
       status: 'success',
