@@ -9,9 +9,10 @@ import {
   deleteUser
 } from '../controllers/userControllers';
 
-import { signUp } from '../controllers/authController';
+import { signUp, signIn } from '../controllers/authController';
 
-router.route('/signUp').post(signUp);
+router.route('/signup').post(signUp);
+router.route('/signin').post(signIn);
 
 router
   .route('/')
