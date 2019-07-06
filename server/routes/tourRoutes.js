@@ -1,7 +1,8 @@
-import express from 'express';
+const express = require('express');
+
 const router = express.Router();
 
-import {
+const {
   getAllTour,
   createTour,
   getTourById,
@@ -9,9 +10,9 @@ import {
   deleteTour,
   getTourStats,
   getMonthlyPlan
-} from '../controllers/tourControllers';
+} = require('../controllers/tourControllers');
 
-import { aliasTopTours } from '../middleware/routeMiddelware';
+const { aliasTopTours, auth } = require('../middleware/routeMiddelware');
 
 router.route('/top-5-cheap').get(aliasTopTours, getAllTour);
 
@@ -21,7 +22,7 @@ router.route('/montly-plan/:year').get(getMonthlyPlan);
 
 router
   .route('/')
-  .get(getAllTour)
+  .get(auth, getAllTour)
   .post(createTour);
 
 router

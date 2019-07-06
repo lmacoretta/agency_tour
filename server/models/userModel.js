@@ -1,7 +1,8 @@
-import mongoose from 'mongoose';
-import validator from 'validator';
-import brcrypt from 'bcryptjs';
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const validator = require('validator');
+const brcrypt = require('bcryptjs');
+
+const { Schema } = mongoose;
 
 const userSchema = new Schema({
   name: {
@@ -37,11 +38,14 @@ const userSchema = new Schema({
     }
   },
 
+  passwordChangedAt: Date,
+
   photo: {
     type: String
   }
 });
 
+/** Encrypto la password */
 userSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();
 
@@ -51,11 +55,26 @@ userSchema.pre('save', async function(next) {
   next();
 });
 
+/** Verifico password */
 userSchema.methods.verifyPassword = async function(
   candidatePassword,
   userPassword
 ) {
   return await brcrypt.compare(candidatePassword, userPassword);
+};
+
+userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
+  if (this.passwordChangedAt) {
+    const changeTimeStamp = parseInt(
+      this.passwordChangedAt.getTime() / 1000,
+      10 //Indica una conversión a número decimal
+    );
+
+    return JWTTimestamp < changeTimeStamp;
+  }
+
+  //Falso significa que no fue cambiado
+  return false;
 };
 
 module.exports = mongoose.model('User', userSchema);

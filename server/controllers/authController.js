@@ -1,6 +1,6 @@
-import User from '../models/userModel';
-import { catchAsync, signToken } from '../helpers/routeHelpers';
-import AppError from '../middleware/appError';
+const User = require('../models/userModel');
+const { catchAsync, signToken } = require('../helpers/routeHelpers');
+const AppError = require('../middleware/appError');
 
 require('dotenv').config();
 

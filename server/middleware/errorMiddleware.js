@@ -14,6 +14,14 @@ const handleDuplicateFieldsDB = err => {
   return new AppError(message, 400);
 };
 
+/** Erorr de JWT */
+const handleJWTError = () =>
+  new AppError('El token no es valido, por favor ingrese de nuevo', 401);
+
+/** Error cuando expira el token */
+const handleJWTExpiredError = () =>
+  new AppError('El token expiro! Por favor, ingresa nuevamente', 401);
+
 /** Errores de validacion */
 const handleValidationErrorDB = err => {
   const errors = Object.values(err.errors).map(el => el.message);
@@ -71,6 +79,8 @@ module.exports = {
       if (error.code === 11000) error = handleDuplicateFieldsDB(error);
       if (error.name === 'ValidationError')
         error = handleValidationErrorDB(error);
+      if (error.name === 'JsonWebTokenError') error = handleJWTError();
+      if (error.name === 'TokenExpiredError') error = handleJWTExpiredError();
 
       sendErrorPro(error, res);
     }
