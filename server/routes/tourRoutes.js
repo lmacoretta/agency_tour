@@ -12,7 +12,11 @@ const {
   getMonthlyPlan
 } = require('../controllers/tourControllers');
 
-const { aliasTopTours, auth } = require('../middleware/routeMiddelware');
+const {
+  aliasTopTours,
+  auth,
+  restricTo
+} = require('../middleware/routeMiddelware');
 
 router.route('/top-5-cheap').get(aliasTopTours, getAllTour);
 
@@ -29,7 +33,7 @@ router
   .route('/:id')
   .get(getTourById)
   .patch(updateTour)
-  .delete(deleteTour);
+  .delete(auth, restricTo('admin', 'lead-guide'), deleteTour);
 
 //Patch actualiza solo las propiedades que queramos, put actualiza todo el objeto entero.
 

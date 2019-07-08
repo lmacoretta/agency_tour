@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const brcrypt = require('bcryptjs');
@@ -39,9 +40,17 @@ const userSchema = new Schema({
   },
 
   passwordChangedAt: Date,
+  passwordResetToken: String,
+  passwordResetExpires: Date,
 
   photo: {
     type: String
+  },
+
+  role: {
+    type: String,
+    enum: ['user', 'guide', 'lead-guide', 'admin'],
+    default: 'user'
   }
 });
 
@@ -75,6 +84,22 @@ userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
 
   //Falso significa que no fue cambiado
   return false;
+};
+
+userSchema.methods.createPasswordResetToken = function() {
+  const resetToken = crypto.randomBytes(32).toString('hex');
+
+  //Creo un hash y le digo que me encripte en ese algoritmo, despues que el resetToken que esta en string me lo updatee y lo hashee, y por ultimo lo digo que ese hash lo guarde en hexadecimal.
+  this.passwordResetToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+
+  console.log({ resetToken }, this.passwordResetToken);
+  //Aca como quiero que el token desp de 10 minutos expire, le paso el Date.now() (Hora de 1970 en milesgundos, hasta hoy en dia) y le digo que sume 10 (los 10 minutos) y lo transformo en milisegundo, osea * 60 (primero a segundos) y * 1000 (despues a milisegundos)
+  this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+
+  return resetToken;
 };
 
 module.exports = mongoose.model('User', userSchema);

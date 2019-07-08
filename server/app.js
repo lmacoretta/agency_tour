@@ -7,6 +7,7 @@ import { globalErrorHandler } from './middleware/errorMiddleware';
 
 /** Middleware */
 app.use(express.json());
+require('dotenv').config();
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));

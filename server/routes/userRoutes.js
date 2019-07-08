@@ -1,18 +1,26 @@
-import express from 'express';
+const express = require('express');
+
 const router = express.Router();
 
-import {
+const {
   getAllUsers,
   getUserById,
   createUser,
   updateUser,
   deleteUser
-} from '../controllers/userControllers';
+} = require('../controllers/userControllers');
 
-import { signUp, signIn } from '../controllers/authController';
+const {
+  signUp,
+  signIn,
+  forgotPassword,
+  resetPassword
+} = require('../controllers/authController');
 
 router.route('/signup').post(signUp);
 router.route('/signin').post(signIn);
+router.route('/forgotPassword').post(forgotPassword);
+router.route('/resetPassword/:token').patch(resetPassword);
 
 router
   .route('/')

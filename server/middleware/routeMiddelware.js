@@ -51,5 +51,22 @@ module.exports = {
     //Si no hay error, deja continuar a la ruta
     req.user = currentUser;
     next();
+  },
+
+  restricTo: (...roles) => {
+    return (req, res, next) => {
+      if (!roles.includes(req.user.role)) {
+        //req.user.role lo puedo usar por el auth middleware que se ejecuta antes que este.
+        //Includes determina si un array tiene determinado elemento, como por ejemplo el rol de usuario.
+        next(
+          new AppError(
+            'No tienes la autorizacion necesaria para realizar esta accion',
+            403
+          )
+        );
+      }
+
+      next();
+    };
   }
 };
