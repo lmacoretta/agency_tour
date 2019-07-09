@@ -1,5 +1,6 @@
-import User from '../models/userModel';
-import { catchAsync } from '../helpers/routeHelpers';
+const User = require('../models/userModel');
+const { catchAsync, filterObj } = require('../helpers/routeHelpers');
+const AppError = require('../middleware/appError');
 
 module.exports = {
   getAllUsers: catchAsync(async (req, res, next) => {
@@ -20,5 +21,32 @@ module.exports = {
 
   updateUser: async (req, res) => {},
 
-  deleteUser: async (req, res) => {}
+  deleteUser: async (req, res) => {},
+
+  updateMe: catchAsync(async (req, res, next) => {
+    if (req.body.password || req.body.passwordConfirm) {
+      next(
+        new AppError(
+          'No puedes ingresar un password aqui, si queres modificar tu password por favor ir a /updateMyPassword',
+          400
+        )
+      );
+    }
+
+    /** FIltro para que solo sea name y email lo que pueda updatear */
+    const filterBody = filterObj(req.body, 'name', 'email');
+
+    /** Updateo los campos del usuario */
+    const updateUser = await User.findByIdAndUpdate(req.user.id, filterBody, {
+      new: true, //Me crea un documento nuevo
+      runValidators: true //Me corre los validadores de nuevo
+    });
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        user: updateUser
+      }
+    });
+  })
 };

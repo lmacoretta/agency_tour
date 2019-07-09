@@ -5,19 +5,23 @@ const { sendEmail } = require('../helpers/routeHelpers');
 
 require('dotenv').config();
 
+const createSendToken = (user, statusCode, res) => {
+  const token = signToken(user._id);
+
+  res.status(statusCode).json({
+    status: 'success',
+    token,
+    data: {
+      user
+    }
+  });
+};
+
 module.exports = {
   signUp: catchAsync(async (req, res, next) => {
     const newUser = await User.create(req.body);
 
-    const token = signToken(newUser._id);
-
-    res.status(201).json({
-      status: 'success',
-      token,
-      data: {
-        user: newUser
-      }
-    });
+    createSendToken(newUser, 201, res);
   }),
 
   signIn: catchAsync(async (req, res, next) => {
@@ -33,12 +37,7 @@ module.exports = {
       return next(new AppError('Email o Password incorrecta', 401));
     }
 
-    const token = signToken(user._id);
-
-    res.status(200).json({
-      status: 'success',
-      token
-    });
+    createSendToken(user, 200, res);
   }),
 
   /** Password perdido */
@@ -84,5 +83,27 @@ module.exports = {
     }
   }),
 
-  resetPassword: async (req, res, next) => {}
+  resetPassword: async (req, res, next) => {},
+
+  /** Updateo el password del usuario */
+  updatePassword: catchAsync(async (req, res, next) => {
+    //Busco el usario
+    const user = await User.findById(req.user.id).select('+password'); //Aca no puedo usar el findByIdAndUpdate porque en el modelo el validador de passwordConfirm manual que tiene y le puse no funciona con el update. Y tambien los middleware de 'save' en el modelo tampoco funciona cuando se hace el update.
+
+    if (await !user.verifyPassword(req.body.passwordCurrent, user.password)) {
+      next(
+        new AppError(
+          'Su password no es correcta, por favor verifique su informacion',
+          401
+        )
+      );
+    }
+
+    /** Updateo el password */
+    user.password = req.body.password;
+    user.passwordConfirm = req.body.passwordConfirm;
+    await user.save();
+
+    createSendToken(user, 200, res);
+  })
 };

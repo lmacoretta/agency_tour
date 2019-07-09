@@ -7,20 +7,26 @@ const {
   getUserById,
   createUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  updateMe
 } = require('../controllers/userControllers');
 
 const {
   signUp,
   signIn,
   forgotPassword,
-  resetPassword
+  resetPassword,
+  updatePassword
 } = require('../controllers/authController');
+
+const { auth } = require('../middleware/routeMiddelware');
 
 router.route('/signup').post(signUp);
 router.route('/signin').post(signIn);
 router.route('/forgotPassword').post(forgotPassword);
 router.route('/resetPassword/:token').patch(resetPassword);
+router.route('/updateMyPassword').patch(auth, updatePassword);
+router.route('/updateMe').patch(auth, updateMe);
 
 router
   .route('/')
