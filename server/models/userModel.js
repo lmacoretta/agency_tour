@@ -51,6 +51,12 @@ const userSchema = new Schema({
     type: String,
     enum: ['user', 'guide', 'lead-guide', 'admin'],
     default: 'user'
+  },
+
+  active: {
+    type: Boolean,
+    default: true,
+    select: false
   }
 });
 
@@ -61,6 +67,13 @@ userSchema.pre('save', async function(next) {
   this.password = await brcrypt.hash(this.password, 12);
 
   this.passwordConfirm = undefined; //Lo hago asi para que no lo guarde en la db. Es solo un campo requerido.
+  next();
+});
+
+/** Esta query middleware va pasar despues del find. Ese ^ es una expresion regular que le dice que todas las querys que empiecen con find la utilice */
+userSchema.pre(/^find/, function(next) {
+  //Con esto me muestra solo los usuarios que active sea not equal ($ne) a false.
+  this.find({ active: { $ne: false } });
   next();
 });
 
