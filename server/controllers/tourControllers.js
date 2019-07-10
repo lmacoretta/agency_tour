@@ -1,6 +1,6 @@
-import Tour from '../models/tourModel';
-import APIFeatures from '../helpers/apiFeatures';
-import { catchAsync } from '../helpers/routeHelpers';
+const Tour = require('../models/tourModel');
+const APIFeatures = require('../helpers/apiFeatures');
+const { catchAsync } = require('../helpers/routeHelpers');
 const AppError = require('../middleware/appError');
 
 module.exports = {

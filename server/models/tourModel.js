@@ -1,4 +1,4 @@
-const mongoose =  require('mongoose');
+const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
@@ -95,7 +95,54 @@ const tourSchema = new Schema({
     select: false
   },
 
-  startDates: [Date]
+  startDates: [Date],
+
+  secretTours: {
+    type: Boolean,
+    default: false
+  },
+
+  startLocation: {
+    //GeoJSON
+    type: {
+      type: String,
+      default: 'Point',
+      enum: ['Point']
+    },
+    coordinates: [Number],
+    address: String,
+    description: String
+  },
+
+  locations: [
+    {
+      type: {
+        type: String,
+        default: 'Point',
+        enum: ['Point']
+      },
+      coordinates: [Number],
+      address: String,
+      description: String,
+      day: Number
+    }
+  ],
+
+  guides: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ]
+});
+
+/** Funcion para hacer un populate en todas las rutas que busque. Lo hago asi para no repetir codigo */
+tourSchema.pre(/^find/, function(next) {
+  this.populate({
+    path: 'guides',
+    select: '-__v -passwordChangeAt'
+  });
+  next();
 });
 
 module.exports = mongoose.model('Tour', tourSchema);

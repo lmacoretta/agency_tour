@@ -1,11 +1,11 @@
 const express = require('express');
 const morgan = require('morgan');
-const AppEror = require('./middleware/appError');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const AppEror = require('./middleware/appError');
 
 const app = express();
 const { globalErrorHandler } = require('./middleware/errorMiddleware');
@@ -53,6 +53,7 @@ app.use('/api', limiter);
 /** Routes */
 app.use('/api/v1/tours', require('./routes/tourRoutes'));
 app.use('/api/v1/users', require('./routes/userRoutes'));
+app.use('/api/v1/reviews', require('./routes/reviewRoutes'));
 
 app.all('*', (req, res, next) => {
   next(
