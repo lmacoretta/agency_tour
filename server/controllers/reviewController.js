@@ -1,26 +1,17 @@
 const Review = require('../models/reviewModel');
 
+const {
+  deleteOne,
+  updateOne,
+  createOne,
+  getOne,
+  getAll
+} = require('../controllers/handlerFactory');
+
 module.exports = {
-  getAllReviews: async (req, res, next) => {
-    const reviews = await Review.find();
-
-    res.status(200).json({
-      status: 'success',
-      results: reviews.length,
-      data: {
-        reviews
-      }
-    });
-  },
-
-  createReview: async (req, res, next) => {
-    const newReview = await Review.create(req.body);
-
-    res.status(201).json({
-      status: 'success',
-      data: {
-        review: newReview
-      }
-    });
-  }
+  getAllReviews: getAll(Review),
+  createReview: createOne(Review),
+  deleteReview: deleteOne(Review),
+  updateReview: updateOne(Review),
+  getReview: getOne(Review)
 };

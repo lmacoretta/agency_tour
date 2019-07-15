@@ -2,26 +2,19 @@ const User = require('../models/userModel');
 const { catchAsync, filterObj } = require('../helpers/routeHelpers');
 const AppError = require('../middleware/appError');
 
+const {
+  deleteOne,
+  updateOne,
+  getOne,
+  getAll
+} = require('../controllers/handlerFactory');
+
 module.exports = {
-  getAllUsers: catchAsync(async (req, res, next) => {
-    const users = await User.find();
-
-    res.status(200).json({
-      status: 'success',
-      results: users.length,
-      data: {
-        users
-      }
-    });
-  }),
-
-  getUserById: async (req, res) => {},
-
+  getAllUsers: getAll(User),
+  getUserById: getOne(User),
   createUser: async (req, res) => {},
-
-  updateUser: async (req, res) => {},
-
-  deleteUser: async (req, res) => {},
+  updateUser: updateOne(User),
+  deleteUser: deleteOne(User),
 
   updateMe: catchAsync(async (req, res, next) => {
     if (req.body.password || req.body.passwordConfirm) {

@@ -2,6 +2,8 @@ const fs = require('fs');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const Tour = require('../../server/models/tourModel');
+const Review = require('../../server/models/reviewModel');
+const User = require('../../server/models/userModel');
 
 mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
@@ -14,11 +16,17 @@ mongoose
 
 /** Read Json file */
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/tours.json`, 'utf-8'));
+const users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, 'utf-8'));
+const reviews = JSON.parse(
+  fs.readFileSync(`${__dirname}/reviews.json`, 'utf-8')
+);
 
 /** Import data into database */
 const importData = async () => {
   try {
     await Tour.create(tours);
+    await User.create(users, { validateBeforeSave: false });
+    await Review.create(reviews);
     console.log('Data cargada con exito');
   } catch (err) {
     console.log(err);
@@ -31,6 +39,8 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     await Tour.deleteMany();
+    await User.deleteMany();
+    await Review.deleteMany();
     console.log('Data borrada con exito');
   } catch (err) {
     console.log(err);

@@ -1,4 +1,5 @@
 const express = require('express');
+const reviewRouter = require('../routes/reviewRoutes');
 
 const router = express.Router();
 
@@ -18,23 +19,27 @@ const {
   restricTo
 } = require('../middleware/routeMiddelware');
 
+router.use('/:tourId/reviews', reviewRouter);
+
 router.route('/top-5-cheap').get(aliasTopTours, getAllTour);
 
 router.route('/tour-stats').get(getTourStats);
 
-router.route('/montly-plan/:year').get(getMonthlyPlan);
+router
+  .route('/montly-plan/:year')
+  .get(auth, restricTo('admin', 'lead-guide', 'guide'), getMonthlyPlan);
 
 router
   .route('/')
-  .get(auth, getAllTour)
-  .post(createTour);
+  .get(getAllTour)
+  .post(auth, restricTo('admin', 'lead-guide'), createTour);
 
 router
   .route('/:id')
   .get(getTourById)
-  .patch(updateTour)
+  .patch(auth, restricTo('admin', 'lead-guide'), updateTour)
   .delete(auth, restricTo('admin', 'lead-guide'), deleteTour);
 
-//Patch actualiza solo las propiedades que queramos, put actualiza todo el objeto entero.
+//router.route('/:tourId/reviews').post(auth, restricTo('user'), createReview);
 
 module.exports = router;

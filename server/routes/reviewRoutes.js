@@ -1,16 +1,31 @@
 const express = require('express');
-const { auth, restricTo } = require('../middleware/routeMiddelware');
+const {
+  auth,
+  restricTo,
+  setToursUserIds
+} = require('../middleware/routeMiddelware');
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 const {
   getAllReviews,
-  createReview
+  createReview,
+  deleteReview,
+  updateReview,
+  getReview
 } = require('../controllers/reviewController');
+
+router.use(auth);
 
 router
   .route('/')
   .get(getAllReviews)
-  .post(auth, restricTo('user'), createReview);
+  .post(restricTo('user'), setToursUserIds, createReview);
+
+router
+  .route('/:id')
+  .get(getReview)
+  .delete(restricTo('user', 'admin'), deleteReview)
+  .patch(restricTo('user', 'admin'), updateReview);
 
 module.exports = router;

@@ -1,83 +1,21 @@
 const Tour = require('../models/tourModel');
-const APIFeatures = require('../helpers/apiFeatures');
 const { catchAsync } = require('../helpers/routeHelpers');
-const AppError = require('../middleware/appError');
+//const AppError = require('../middleware/appError');
+
+const {
+  deleteOne,
+  updateOne,
+  createOne,
+  getOne,
+  getAll
+} = require('../controllers/handlerFactory');
 
 module.exports = {
-  getAllTour: catchAsync(async (req, res, next) => {
-    /** Envio la query */
-    const features = new APIFeatures(Tour.find(), req.query)
-      .filter()
-      .sort()
-      .limitFields()
-      .paginate(); //Esto funciona porque retorno el this en el objeto.
-
-    const tour = await features.query;
-
-    /** Respuesta */
-    res.status(200).json({
-      data: {
-        status: 'success',
-        results: tour.length,
-        tour
-      }
-    });
-  }),
-
-  getTourById: catchAsync(async (req, res, next) => {
-    const tour = await Tour.findById(req.params.id);
-
-    if (!tour) {
-      return next(
-        new AppError('No se encuentra una excursion con ese id', 404)
-      );
-    }
-
-    res.status(200).json({
-      data: {
-        tour
-      }
-    });
-  }),
-
-  createTour: catchAsync(async (req, res, next) => {
-    const newTour = await Tour.create(req.body);
-
-    res.status(201).json({
-      status: 'success',
-      data: {
-        tour: newTour
-      }
-    });
-  }),
-
-  updateTour: catchAsync(async (req, res, next) => {
-    const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true
-    });
-
-    if (!tour) {
-      return next(
-        new AppError('No se encuentra una excursion con ese id', 404)
-      );
-    }
-
-    res.status(200).json({
-      status: 'success',
-      data: {
-        tour
-      }
-    });
-  }),
-
-  deleteTour: catchAsync(async (req, res, next) => {
-    await Tour.findByIdAndDelete(req.params.id);
-
-    res.status(204).json({
-      status: 'success'
-    });
-  }),
+  getAllTour: getAll(Tour),
+  getTourById: getOne(Tour, { path: 'reviews' }),
+  createTour: createOne(Tour),
+  updateTour: updateOne(Tour),
+  deleteTour: deleteOne(Tour),
 
   getTourStats: catchAsync(async (req, res, next) => {
     const stats = await Tour.aggregate([

@@ -20,20 +20,27 @@ const {
   updatePassword
 } = require('../controllers/authController');
 
-const { auth } = require('../middleware/routeMiddelware');
+const { auth, getMe, restricTo } = require('../middleware/routeMiddelware');
 
-router.route('/signup').post(signUp);
-router.route('/signin').post(signIn);
-router.route('/forgotPassword').post(forgotPassword);
-router.route('/resetPassword/:token').patch(resetPassword);
-router.route('/updateMyPassword').patch(auth, updatePassword);
-router.route('/updateMe').patch(auth, updateMe);
-router.route('/deleteMe').delete(auth, deleteMe);
+router.post('/signup', signUp);
+router.post('/signin', signIn);
+router.post('/forgotPassword', forgotPassword);
+router.patch('/resetPassword/:token', resetPassword);
+
+// Proteje todas las rutas despues de este middleware
+router.use(auth);
+
+router.get('/me', getMe, getUserById);
+router.patch('/updateMyPassword', updatePassword);
+router.patch('/updateMe', updateMe);
+router.delete('/deleteMe', deleteMe);
+
+router.use(restricTo('admin'));
 
 router
   .route('/')
   .get(getAllUsers)
-  .post(createUser);
+  .post(createUser); //no implementado
 
 router
   .route('/:id')
