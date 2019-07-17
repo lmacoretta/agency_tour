@@ -46,7 +46,8 @@ const tourSchema = new Schema(
       type: Number,
       default: 4.5,
       min: [1, 'El rating minimo no puede ser menor a 1.0'],
-      max: [5, 'El rating maximo no pude ser mayor a 5.0']
+      max: [5, 'El rating maximo no pude ser mayor a 5.0'],
+      set: val => Math.round(val * 10) / 10 //4.6666, 46.6, 47, 4.7
     },
 
     ratingsQuantity: {
@@ -141,6 +142,9 @@ const tourSchema = new Schema(
     toObject: { virtuals: true }
   }
 );
+
+tourSchema.index({ price: 1, ratingsAverage: -1 });
+tourSchema.index({ slug: 1 });
 
 /** Funcion para hacer un populate en todas las rutas que busque. Lo hago asi para no repetir codigo */
 tourSchema.pre(/^find/, function(next) {
