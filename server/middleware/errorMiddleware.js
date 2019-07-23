@@ -66,8 +66,8 @@ const sendErrorPro = (err, res) => {
 
 module.exports = {
   globalErrorHandler: (err, req, res, next) => {
-    err.statusCode = err.statusCode || 500;
-    err.status = err.status || 'error';
+    err.statusCode = err.statusCode || 500; //Paso el statusCode que me mande express o sino un 500.
+    err.status = err.status || 'error'; //Lo mismo que arriba
 
     if (process.env.NODE_ENV === 'development') {
       sendErrorDev(err, res);

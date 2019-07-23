@@ -1,6 +1,6 @@
 const Tour = require('../models/tourModel');
 const { catchAsync } = require('../helpers/routeHelpers');
-//const AppError = require('../middleware/appError');
+const AppError = require('../middleware/appError');
 
 const {
   deleteOne,
@@ -92,6 +92,72 @@ module.exports = {
       status: 'success',
       data: {
         plan
+      }
+    });
+  }),
+
+  //ruta tours-within/:distance/center/:latlng/unit/:unit
+  //tours-whitin?distance=223&center=-40,45&unit=mi queryString
+  //tours-whitin/233/center/-40,45/unit/mi params
+  getToursWithin: catchAsync(async (req, res, next) => {
+    const { distance, latlng, unit } = req.params;
+    const [lat, lng] = latlng.split(',');
+
+    const radius = unit === 'mi' ? distance / 3963.2 : distance / 6378.1; //3963.2 Radio de la tierra en millas, 6378.1 radio en km.
+
+    if (!lat || !lng) {
+      next(new AppError('Por favor, ingrese la latitud y longitud', 400));
+    }
+
+    const tours = await Tour.find({
+      startLocation: { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
+    });
+    //geoWithin busca documentos con geometria, entonces esa geometria es la que le paso, por eso se lo paso con centerSphere. Tambien mongo espera que le pase un radius, en una unidad especial llamada radiant.
+
+    res.status(200).json({
+      status: 'success',
+      results: tours.length,
+      data: {
+        data: tours
+      }
+    });
+  }),
+
+  getDistance: catchAsync(async (req, res, next) => {
+    const { latlng, unit } = req.params;
+    const [lat, lng] = latlng.split(',');
+
+    const multiplier = unit === 'mi' ? 0.000621371 : 0.001;
+
+    if (!lat || !lng) {
+      next(new AppError('Por favor, ingrese la latitud y longitud', 400));
+    }
+
+    const distance = await Tour.aggregate([
+      {
+        $geoNear: {
+          near: {
+            type: 'Point',
+            coordinates: [lng * 1, lat * 1]
+          },
+
+          distanceField: 'distance',
+          distanceMultiplier: multiplier
+        }
+      },
+
+      {
+        $project: {
+          distance: 1,
+          name: 1
+        }
+      }
+    ]);
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        data: distance
       }
     });
   })

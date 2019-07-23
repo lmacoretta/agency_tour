@@ -55,6 +55,7 @@ app.use('/api/v1/tours', require('./routes/tourRoutes'));
 app.use('/api/v1/users', require('./routes/userRoutes'));
 app.use('/api/v1/reviews', require('./routes/reviewRoutes'));
 
+/** Error operacional Global - No existe la ruta */
 app.all('*', (req, res, next) => {
   next(
     new AppEror(

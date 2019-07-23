@@ -43,6 +43,7 @@ const tourSchema = new Schema(
     },
 
     ratingsAverage: {
+      //Calificacion promedio
       type: Number,
       default: 4.5,
       min: [1, 'El rating minimo no puede ser menor a 1.0'],
@@ -51,6 +52,7 @@ const tourSchema = new Schema(
     },
 
     ratingsQuantity: {
+      //Cantidad de calificaciones
       type: Number,
       default: 0
     },
@@ -145,6 +147,7 @@ const tourSchema = new Schema(
 
 tourSchema.index({ price: 1, ratingsAverage: -1 });
 tourSchema.index({ slug: 1 });
+tourSchema.index({ startLocation: '2dsphere' });
 
 /** Funcion para hacer un populate en todas las rutas que busque. Lo hago asi para no repetir codigo */
 tourSchema.pre(/^find/, function(next) {
