@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
 import './header.scss';
 
@@ -18,9 +19,9 @@ const Header = () => {
         </div>
 
         <div className="btn-box">
-          <a href="#" className="btn btn-white btn-animated">
+          <Link to="/tours" className="btn btn-white btn-animated">
             Descubre nuestros tours
-          </a>
+          </Link>
         </div>
       </header>
     </Fragment>

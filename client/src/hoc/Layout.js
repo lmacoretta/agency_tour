@@ -3,7 +3,7 @@ import React from 'react';
 import './layout.scss';
 
 /** Components */
-import Header from '../components/Header';
+import Header from '../components/Tours/Header';
 
 const Landing = props => {
   return (

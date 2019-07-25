@@ -6,7 +6,7 @@ import './header.scss';
 const Header = () => {
   return (
     <div>
-      <header className="header">
+      <header className="tour-header">
         <nav className="nav nav--tours">
           <Link to="/tours" className="nav__el">
             Nuestros Tours
