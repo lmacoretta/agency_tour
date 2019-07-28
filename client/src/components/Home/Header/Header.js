@@ -19,7 +19,7 @@ const Header = () => {
         </div>
 
         <div className="btn-box">
-          <Link to="/tours" className="btn btn-white btn-animated">
+          <Link to="/tours" className="btn btn--white btn-animated">
             Descubre nuestros tours
           </Link>
         </div>

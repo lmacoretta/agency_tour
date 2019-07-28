@@ -1,0 +1,22 @@
+.heading-tertiary {
+  color: #fff;
+  font-size: 2.75rem;
+  text-transform: uppercase;
+  position: absolute;
+  text-align: right;
+  bottom: -1rem;
+  right: 2rem;
+  width: 70%;
+  z-index: 10;
+  font-weight: 400;
+
+  & span {
+    padding: 1rem 1.5rem;
+    line-height: 1;
+    background-image: linear-gradient(
+      to bottom right,
+      rgba(125, 213, 111, 0.85),
+      rgba(40, 180, 135, 0.85)
+    );
+  }
+}

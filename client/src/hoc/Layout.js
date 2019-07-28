@@ -1,16 +1,14 @@
-import React from 'react';
-
-import './layout.scss';
+import React, { Fragment } from 'react';
 
 /** Components */
 import Header from '../components/Tours/Header';
 
 const Landing = props => {
   return (
-    <div className="container">
+    <Fragment>
       <Header />
       {props.children}
-    </div>
+    </Fragment>
   );
 };
 

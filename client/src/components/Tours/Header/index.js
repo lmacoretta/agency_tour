@@ -12,9 +12,13 @@ const Header = () => {
             Nuestros Tours
           </Link>
         </nav>
-        <div className="header__logo">Logo</div>
+        <img
+          src="/images/logo-white.png"
+          alt="Logo"
+          className="tour-header__logo"
+        />
         <nav className="nav nav--user">
-          <Link to="#" className="nav__el nav__el--logout">
+          <Link to="/login" className="nav__el nav__el--logout">
             Iniciar sesion
           </Link>
           <Link to="#" className="nav__el">

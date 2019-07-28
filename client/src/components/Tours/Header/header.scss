@@ -7,6 +7,10 @@
   align-items: center;
   background-color: $color-dark;
   color: $color-grey-light;
+
+  &__logo {
+    height: 3.5rem;
+  }
 }
 
 .nav {
