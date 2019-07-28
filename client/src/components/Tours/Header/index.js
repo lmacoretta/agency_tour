@@ -21,6 +21,9 @@ const Header = () => {
           <Link to="/login" className="nav__el nav__el--logout">
             Iniciar sesion
           </Link>
+          <Link to="/register" className="nav__el nav__el--logout">
+            Registrarse
+          </Link>
           <Link to="#" className="nav__el">
             <img className="nav_user-img" src="#" alt="Img" />
             User

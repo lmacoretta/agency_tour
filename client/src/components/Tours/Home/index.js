@@ -5,6 +5,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Layout from '../../../hoc/Layout'; //HOC
 import ToursCard from '../ToursCard';
 import Login from '../../LoginRegister/Login';
+import Register from '../../LoginRegister/Register';
 
 const TourHome = () => {
   return (
@@ -13,6 +14,7 @@ const TourHome = () => {
         <Layout>
           <Route exact path="/tours" component={ToursCard} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
         </Layout>
       </Switch>
     </BrowserRouter>
