@@ -4,7 +4,6 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 /** Components */
 import Home from './components/Home';
 import TourHome from './components/Tours/Home';
-import Login from './components/LoginRegister/Login/Login';
 
 const App = () => {
   return (

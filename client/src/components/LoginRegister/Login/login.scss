@@ -1,0 +1,99 @@
+@import '../../../sass/variables';
+@import '../../../sass/utilities';
+
+.login {
+  background-color: $color-grey-light;
+  padding: 8rem 6rem;
+  position: relative;
+
+  &__form {
+    background-color: #fff;
+    margin: 0 auto;
+    max-width: 55rem;
+    padding: 5rem 7rem;
+    border-radius: 1rem;
+    box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.06);
+  }
+}
+
+.form {
+  &-group {
+    &:not(:last-child) {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  &-text {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  &-input {
+    width: 100%;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    background-color: #f7f7f7;
+    padding: 1.25rem 1.75rem;
+    font-family: inherit;
+    font-size: 1.4rem;
+    border-bottom: 3px solid transparent;
+    display: block;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
+      border-bottom: 3px solid $color-primary;
+    }
+
+    &:focus:invalid {
+      border-bottom: 3px solid $color-secondary-dark;
+    }
+
+    &::-webkit-input-placeholder {
+      color: $color-grey-dark-2;
+    }
+  }
+
+  &-label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    margin-top: 0.7rem;
+    display: block;
+    transition: all 0.3s;
+  }
+
+  &-input:placeholder-shown + &-label {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4rem);
+  }
+}
+
+.form {
+  &--login {
+    margin-top: 2rem;
+  }
+}
+
+/* Al final no lo use, pero lo dejo por si lo quiero usar*/
+/*
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  // opacity: 0.3;
+
+  &__content {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+*/

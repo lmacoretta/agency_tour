@@ -4,7 +4,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 /** Components */
 import Layout from '../../../hoc/Layout'; //HOC
 import ToursCard from '../ToursCard';
-import Login from '../../LoginRegister/Login/Login';
+import Login from '../../LoginRegister/Login';
 
 const TourHome = () => {
   return (

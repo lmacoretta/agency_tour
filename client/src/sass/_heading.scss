@@ -1,3 +1,19 @@
+.heading-secundary {
+  text-transform: uppercase;
+  font-size: 2.25rem;
+  background-image: linear-gradient(
+    to right,
+    $color-primary-light,
+    $color-primary-dark
+  );
+  font-weight: 700;
+  color: transparent;
+  display: inline-block;
+  line-height: 1.3;
+  letter-spacing: 0.1rem;
+  background-clip: text; //La magia para que las letras usen el background-image
+}
+
 .heading-tertiary {
   color: #fff;
   font-size: 2.75rem;
@@ -8,7 +24,7 @@
   right: 2rem;
   width: 70%;
   z-index: 10;
-  font-weight: 400;
+  font-weight: 300;
 
   & span {
     padding: 1rem 1.5rem;
