@@ -41,7 +41,7 @@ const Register = () => {
               type="password"
               name="password"
               required
-              placeholder="Password"
+              placeholder="●●●●●●"
               className="form-input"
               minLength="6"
             />
@@ -50,17 +50,17 @@ const Register = () => {
           <div className="form-group">
             <label className="form-text">Confirmacion del Password</label>
             <input
-              type="password2"
+              type="password"
               name="password2"
               required
-              placeholder="Confirmacion del Password"
+              placeholder="●●●●●●"
               className="form-input"
               minLength="6"
             />
           </div>
 
           <a href="" className="btn btn--green u-margin-top-small">
-            Ingresar
+            Registrarse
           </a>
         </form>
       </div>

@@ -15,7 +15,7 @@
 
 .nav {
   padding: 0 5rem;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   text-transform: uppercase;
 
   &__user {
@@ -31,9 +31,27 @@
     text-decoration: none;
     color: $color-grey-light;
     cursor: pointer;
+    transition: all 0.3s;
+    display: inline-block;
 
-    &--logout {
+    &:not(:last-child) {
       margin-right: 3rem;
+    }
+
+    &--cta {
+      border: 1px solid white;
+      padding: 1rem 3rem;
+      border-radius: 10rem;
+
+      &:hover {
+        background-color: #fff;
+        color: $color-black;
+      }
+    }
+
+    &:hover {
+      transform: translateY(-3px);
+      text-shadow: 0 0.7rem 1rem $color-black;
     }
   }
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './tourCard.scss';
 
@@ -59,9 +60,9 @@ const ToursCard = () => {
               <span className="card__footer-price">4.8</span>
               <span className="card__footer-text"> rating (6)</span>
             </p>
-            <a href="#" className="btn btn--green btn--small">
-              Details
-            </a>
+            <Link to="/details" className="btn btn--green btn--small">
+              Detalle
+            </Link>
           </div>
         </div>
       </div>

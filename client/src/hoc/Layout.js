@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
 
 /** Components */
-import Header from '../components/Tours/Header';
+import Navbar from '../components/Tours/Navbar';
 
 const Landing = props => {
   return (
     <Fragment>
-      <Header />
+      <Navbar />
       {props.children}
     </Fragment>
   );

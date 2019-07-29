@@ -6,6 +6,7 @@ import Layout from '../../../hoc/Layout'; //HOC
 import ToursCard from '../ToursCard';
 import Login from '../../LoginRegister/Login';
 import Register from '../../LoginRegister/Register';
+import CardDetail from '../CardDetail';
 
 const TourHome = () => {
   return (
@@ -15,6 +16,7 @@ const TourHome = () => {
           <Route exact path="/tours" component={ToursCard} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/details" component={CardDetail} />
         </Layout>
       </Switch>
     </BrowserRouter>
