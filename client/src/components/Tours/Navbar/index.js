@@ -7,18 +7,20 @@ const Header = () => {
   const isAuthenticated = false;
 
   return (
-    <div>
+    <Fragment>
       <header className="tour-header">
+        <img
+          src="/images/logo-green-small.png"
+          alt="Logo"
+          className="tour-header__logo"
+        />
+
         <nav className="nav nav--tours">
           <Link to="/tours" className="nav__el">
             Nuestros Tours
           </Link>
         </nav>
-        <img
-          src="/images/logo-white.png"
-          alt="Logo"
-          className="tour-header__logo"
-        />
+
         <nav className="nav nav--user">
           {isAuthenticated ? (
             <Fragment>
@@ -29,10 +31,7 @@ const Header = () => {
             </Fragment>
           ) : (
             <Fragment>
-              <Link to="/" className="nav__el">
-                Home
-              </Link>
-              <Link to="/login" className="nav__el nav__el--logout">
+              <Link to="/login" className="nav__el nav__el--in">
                 Ingresá
               </Link>
               <Link to="/register" className="nav__el nav__el--cta">
@@ -42,7 +41,7 @@ const Header = () => {
           )}
         </nav>
       </header>
-    </div>
+    </Fragment>
   );
 };
 

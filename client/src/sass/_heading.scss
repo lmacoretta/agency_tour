@@ -1,9 +1,19 @@
+@import '../sass/variables';
+
+.heading-primary {
+  color: $color-white;
+  text-transform: uppercase;
+  font-size: 5rem;
+  display: inline-block;
+  text-align: center;
+}
+
 .heading-secundary {
   text-transform: uppercase;
   font-size: 2.25rem;
   background-image: linear-gradient(
     to right,
-    $color-primary-light,
+    $color-primary,
     $color-primary-dark
   );
   font-weight: 700;
@@ -31,8 +41,8 @@
     line-height: 1;
     background-image: linear-gradient(
       to bottom right,
-      rgba(125, 213, 111, 0.85),
-      rgba(40, 180, 135, 0.85)
+      rgba($color-primary-light, 0.85),
+      rgba($color-primary-dark, 0.85)
     );
   }
 }

@@ -1,24 +1,32 @@
 @import '../../../sass/variables';
 
 .tour-header {
-  height: 8rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background-color: $color-dark;
-  color: $color-grey-light;
+  background-color: $color-white;
+  width: 83%;
+  margin: 0 auto;
 
   &__logo {
-    height: 3.5rem;
+    height: 2.75rem;
+    margin-left: 1.5rem;
   }
 }
 
 .nav {
-  padding: 0 5rem;
+  padding: 0.7rem;
   font-size: 1.4rem;
-  text-transform: uppercase;
+  display: flex;
+  align-items: center;
 
-  &__user {
+  &--tours {
+    margin-left: 2rem;
+    flex: 1;
+  }
+
+  &--user {
+    margin-right: 1rem;
+
     &-img {
       height: 3.5rem;
       width: 3.5rem;
@@ -29,29 +37,30 @@
 
   &__el {
     text-decoration: none;
-    color: $color-grey-light;
+    color: $color-black-light;
     cursor: pointer;
     transition: all 0.3s;
     display: inline-block;
+    font-weight: bold;
+    font-family: inherit;
 
     &:not(:last-child) {
-      margin-right: 3rem;
+      margin-right: 1.5rem;
     }
 
     &--cta {
-      border: 1px solid white;
+      border: 1px solid $color-primary-light;
       padding: 1rem 3rem;
       border-radius: 10rem;
 
       &:hover {
-        background-color: #fff;
-        color: $color-black;
+        background-color: $color-primary-light;
+        color: $color-white;
       }
     }
 
     &:hover {
       transform: translateY(-3px);
-      text-shadow: 0 0.7rem 1rem $color-black;
     }
   }
 }

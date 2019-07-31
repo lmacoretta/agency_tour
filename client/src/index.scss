@@ -12,10 +12,12 @@ html {
 
 body {
   box-sizing: border-box;
-  font-family: 'Lato', sans-serif;
+  //font-family: 'Lato', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 300;
   line-height: 1.6;
   color: $color-grey-dark;
   padding: 3rem;
+  background-color: $color-white;
   //min-height: 100vh;
 }

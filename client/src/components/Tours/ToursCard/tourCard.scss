@@ -3,7 +3,7 @@
 
 .main {
   padding: 8rem 6rem;
-  background-color: $color-grey-light;
+  background-color: inherit;
   height: 100%;
 }
 
@@ -87,7 +87,7 @@
     width: 2.5rem;
     height: 2.5rem;
     margin-right: 0.7rem;
-    fill: $color-primary;
+    fill: $color-primary-light;
   }
 }
 

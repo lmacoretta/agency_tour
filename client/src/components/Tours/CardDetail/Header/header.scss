@@ -1,0 +1,65 @@
+@import '../../../../sass/variables';
+@import '../../../../sass/heading';
+
+.section__header {
+  height: 95vh;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-dark, 0.6),
+      rgba($color-grey-dark, 0.6)
+    ),
+    url('/images/img-9.jpg');
+  background-size: cover;
+  background-position: center;
+  margin-top: 2rem;
+
+  //clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
+  display: grid;
+  grid-template-rows: 1fr min-content 1fr;
+  grid-template-columns: 1fr 30% 1fr;
+}
+
+.header {
+  &__text-box {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+    align-self: flex-end;
+  }
+}
+
+.card {
+  &-data {
+    grid-row: 3 / 3;
+    grid-column: 2 / 3;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  &-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 1rem;
+    fill: #00cc99;
+  }
+
+  &__icon-container {
+    display: flex;
+    padding-top: 2rem;
+    justify-content: center;
+
+    &:not(:last-child) {
+      margin-right: 4rem;
+    }
+
+    & span {
+      //position: absolute;
+      color: $color-white;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+  }
+}
