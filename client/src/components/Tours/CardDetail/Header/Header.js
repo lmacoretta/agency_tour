@@ -7,7 +7,7 @@ const Header = () => {
     <Fragment>
       <section className="section__header">
         <div className="header__text-box">
-          <h1 className="heading-primary">The Sea Explorer Tour</h1>
+          <h1 className="heading-primary">Exploracion Maritima Tour</h1>
         </div>
 
         <div className="card-data">
@@ -15,7 +15,7 @@ const Header = () => {
             <svg className="card-icon">
               <use xlinkHref="images/sprite.svg#icon-clock"></use>
             </svg>
-            <span>7, days</span>
+            <span>7, dias</span>
           </div>
 
           <div className="card__icon-container">

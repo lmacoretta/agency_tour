@@ -70,7 +70,7 @@ const Description = props => {
         <div className="description-box">
           <div>
             <h2 className="heading-secundary u-mb-large">
-              Sobre The Sea Explorer Tour
+              Sobre Exploracion Maritima Tour
             </h2>
 
             <p className="description__text">

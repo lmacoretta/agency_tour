@@ -1,0 +1,36 @@
+@import '../../../sass/variables';
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $color-white;
+  padding: 2rem 0 1rem 0;
+  width: 83%;
+  margin: 0 auto;
+
+  &__img {
+    width: 8rem;
+  }
+
+  &__link {
+    font-size: 1.4rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: $color-black-light;
+
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+
+    &:hover {
+      color: $color-primary-light;
+    }
+  }
+
+  &__copyright {
+    margin-top: 0.5rem;
+    font-size: 1.4rem;
+    text-align: right;
+  }
+}

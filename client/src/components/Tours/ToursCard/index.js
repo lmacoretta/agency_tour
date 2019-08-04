@@ -18,13 +18,13 @@ const ToursCard = () => {
               />
             </div>
             <h3 className="heading-tertiary">
-              <span>The sea Explorer</span>
+              <span>Exploracion maritima</span>
             </h3>
           </div>
           <div className="card__details">
-            <h4 className="card__sub-heading">MEDIUM 7-DAY tour</h4>
+            <h4 className="card__sub-heading">Medio 7-Dias tour</h4>
             <p className="card__text">
-              Exploring the jaw-dropping US east coast by foot and by boat
+              Explora la asombrosa costa de EEUU a pie y en barco.
             </p>
             <div className="card__data">
               <svg className="card__icon">
@@ -36,25 +36,25 @@ const ToursCard = () => {
               <svg className="card__icon">
                 <use xlinkHref="images/sprite.svg#icon-calendar"></use>
               </svg>
-              <span>June 2021</span>
+              <span>Junio 2021</span>
             </div>
             <div className="card__data">
               <svg className="card__icon">
                 <use xlinkHref="images/sprite.svg#icon-flag"></use>
               </svg>
-              <span>4 stops</span>
+              <span>4 paradas</span>
             </div>
             <div className="card__data">
               <svg className="card__icon">
                 <use xlinkHref="images/sprite.svg#icon-user"></use>
               </svg>
-              <span>15 people</span>
+              <span>15 personas</span>
             </div>
           </div>
           <div className="card__footer">
             <p>
               <span className="card__footer-price">$ 497</span>
-              <span className="card__footer-text"> per person</span>
+              <span className="card__footer-text"> por persona</span>
             </p>
             <p className="card__rating">
               <span className="card__footer-price">4.8</span>

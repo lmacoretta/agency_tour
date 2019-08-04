@@ -25,7 +25,7 @@ const BuyTour = () => {
           </div>
           <div>
             <a href="#" className="btn btn--green">
-              Comprar el tour ahora
+              Reservar el tour ahora
             </a>
           </div>
         </div>
