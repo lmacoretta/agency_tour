@@ -6,6 +6,8 @@ import Header from './Header/Header';
 import Description from './Description';
 import Picture from './Picture';
 import MapGL from './MapGL';
+import Details from './Details';
+import BuyTour from './BuyTour';
 
 const CardDetail = () => {
   return (
@@ -14,6 +16,8 @@ const CardDetail = () => {
       <Description />
       <Picture />
       <MapGL />
+      <Details />
+      <BuyTour />
     </Fragment>
   );
 };
