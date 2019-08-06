@@ -1,8 +1,9 @@
 import React from 'react';
-
-import './cta.scss';
+import { Link } from 'react-router-dom';
 
 const BuyTour = () => {
+  const isAuthenticated = true;
+
   return (
     <section className="section__cta">
       <div className="cta">
@@ -24,9 +25,15 @@ const BuyTour = () => {
             </p>
           </div>
           <div>
-            <a href="#" className="btn btn--green">
-              Reservar el tour ahora
-            </a>
+            {isAuthenticated ? (
+              <Link href="#" className="btn btn--green">
+                Reservar el tour ahora
+              </Link>
+            ) : (
+              <Link href="#" className="btn btn--green">
+                Inicie sesión para reservar
+              </Link>
+            )}
           </div>
         </div>
       </div>

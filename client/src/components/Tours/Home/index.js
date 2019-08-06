@@ -7,6 +7,7 @@ import ToursCard from '../ToursCard';
 import Login from '../../LoginRegister/Login';
 import Register from '../../LoginRegister/Register';
 import CardDetail from '../CardDetail';
+import UserProfile from '../../UserProfile/Home';
 
 const TourHome = () => {
   return (
@@ -17,6 +18,7 @@ const TourHome = () => {
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/details" component={CardDetail} />
+          <Route exact path="/me" component={UserProfile} />
         </Layout>
       </Switch>
     </BrowserRouter>

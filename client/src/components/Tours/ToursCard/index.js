@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import './tourCard.scss';
-
 const ToursCard = () => {
   return (
     <div className="main">

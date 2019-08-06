@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import ReactMapGL, { NavigationControl } from 'react-map-gl';
 
-import './map.scss';
-
 const MapGL = () => {
   const [viewport, setViewport] = useState({
     width: '100%',

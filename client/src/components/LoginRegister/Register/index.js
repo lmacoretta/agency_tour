@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import '../Login/login.scss';
-
 const Register = () => {
   return (
     <div className="login">

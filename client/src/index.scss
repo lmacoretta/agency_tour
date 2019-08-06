@@ -1,23 +1,31 @@
-@import './sass/variables';
+/*  Utilidades */
+@import './sass/base/variables';
+@import './sass/utilities';
+@import './sass/btn';
+@import './sass/heading';
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit;
-}
+/* Archivo Base */
+@import './sass/base/base';
 
-html {
-  font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
-}
+/* Home */
+@import './sass/components/Home/header';
 
-body {
-  box-sizing: border-box;
-  //font-family: 'Lato', sans-serif;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
-  line-height: 1.6;
-  color: $color-grey-dark;
-  padding: 3rem;
-  background-color: $color-white;
-  //min-height: 100vh;
-}
+/* Login o Registro */
+@import './sass/components/LoginRegister/login_register.scss';
+
+/* Tours */
+@import './sass/components/Tours/footer';
+@import './sass/components/Tours/header';
+@import './sass/components/Tours/tour_card';
+
+/* Tour Detail */
+@import './sass/components/Tours/Card_Detail/buy_tour';
+@import './sass/components/Tours/Card_Detail/description';
+@import './sass/components/Tours/Card_Detail/details';
+@import './sass/components/Tours/Card_Detail/header';
+@import './sass/components/Tours/Card_Detail/map';
+@import './sass/components/Tours/Card_Detail/picture';
+
+/* Profile User */
+@import './sass/components/UserProfile/profile_menu';
+@import './sass/components/UserProfile/profileHOC';

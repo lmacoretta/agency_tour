@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import './description.scss';
-
 const Description = props => {
   return (
     <Fragment>

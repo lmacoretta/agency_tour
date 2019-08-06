@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './login.scss';
-
 const Login = () => {
   return (
     <div className="login">

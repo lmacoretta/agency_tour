@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import './details.scss';
-
 const Details = () => {
   return (
     <div>

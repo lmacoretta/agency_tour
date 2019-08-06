@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
-import './header.scss';
-
 const Header = () => {
   const isAuthenticated = false;
 
@@ -24,9 +22,16 @@ const Header = () => {
         <nav className="nav nav--user">
           {isAuthenticated ? (
             <Fragment>
-              <Link to="#" className="nav__el">
-                <img className="nav_user-img" src="#" alt="Img" />
-                User
+              <Link to="#" className="nav__el nav__el--logout">
+                Logout
+              </Link>
+              <Link to="/me" className="nav__el">
+                <img
+                  className="nav nav__user--img"
+                  src="/images/Users/user-17.jpg"
+                  alt="Img"
+                />
+                <span>User</span>
               </Link>
             </Fragment>
           ) : (
