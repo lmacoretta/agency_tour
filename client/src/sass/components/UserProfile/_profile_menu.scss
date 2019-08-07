@@ -1,13 +1,9 @@
 .profile {
   &__nav {
-    width: 25%;
-    //background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
-    background-color: $color-dark;
-    height: 100%;
-    border-radius: 1rem;
-
     display: flex;
     flex-direction: column;
+    flex: 32rem 0 0;
+    background-color: $color-dark;
   }
 
   &__list {

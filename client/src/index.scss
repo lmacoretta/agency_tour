@@ -1,8 +1,8 @@
 /*  Utilidades */
 @import './sass/base/variables';
-@import './sass/utilities';
-@import './sass/btn';
-@import './sass/heading';
+@import './sass/utils/utilities';
+@import './sass/utils/btn';
+@import './sass/utils/heading';
 
 /* Archivo Base */
 @import './sass/base/base';
@@ -29,3 +29,4 @@
 /* Profile User */
 @import './sass/components/UserProfile/profile_menu';
 @import './sass/components/UserProfile/profileHOC';
+@import './sass/components/UserProfile/setting';
