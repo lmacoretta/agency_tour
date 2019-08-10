@@ -11,46 +11,50 @@ module.exports = {
   },
 
   auth: async (req, res, next) => {
-    // Me fijo si el token está
+    // Me fijo si el token está en el header de la petición
     const token = req.header('x-auth-token');
 
     //Si no hay, error.
     if (!token) {
       return next(
-        new AppError('No estas logeado. Por favor, inicia sesion'),
+        new AppError('No estas logeado. Por favor, inicia sesión'),
         401
       );
     }
 
-    //Verifico que sea valido
-    const decoded = await jwt.verify(token, process.env.SECRET);
+    try {
+      //Verifico que sea valido
+      const decoded = await jwt.verify(token, process.env.SECRET);
 
-    //Busco si el usuario existe con el id del jwt.
-    const currentUser = await User.findById(decoded.id);
+      //Busco si el usuario existe con el id del jwt.
+      const currentUser = await User.findById(decoded.id);
 
-    //Si no está, error
-    if (!currentUser) {
-      next(
-        new AppError(
-          'El token que le pertenece a este usuario ya no existe',
-          401
-        )
-      );
+      //Si no está, error
+      if (!currentUser) {
+        next(
+          new AppError(
+            'El token que le pertenece a este usuario ya no existe',
+            401
+          )
+        );
+      }
+
+      //Me fijo que el usuario no haya cambiado el password
+      if (currentUser.changedPasswordAfter(decoded.iat)) {
+        return next(
+          new AppError(
+            'El usuario ha cambiado recientemente el password, por favor, ingrese nuevamente',
+            401
+          )
+        );
+      }
+
+      //Si no hay error, deja continuar a la ruta
+      req.user = currentUser;
+      next();
+    } catch (err) {
+      res.status(401).json({ message: 'El token no es valido' });
     }
-
-    //Me fijo que el usuario no haya cambiado el password
-    if (currentUser.changedPasswordAfter(decoded.iat)) {
-      return next(
-        new AppError(
-          'El usuario ha cambiado recientemente el password, por favor, ingrese nuevamente',
-          401
-        )
-      );
-    }
-
-    //Si no hay error, deja continuar a la ruta
-    req.user = currentUser;
-    next();
   },
 
   restricTo: (...roles) => {

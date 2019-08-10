@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
 
   return (
     <Fragment>

@@ -11,7 +11,7 @@ const app = express();
 const { globalErrorHandler } = require('./middleware/errorMiddleware');
 
 /** Middleware */
-app.use(helmet());
+app.use(helmet()); //Helmet ayuda a proteger la aplicación de algunas vulnerabilidades web conocidas mediante el establecimiento correcto de cabeceras HTTP.
 
 app.use(express.json({ limit: '10kb' }));
 require('dotenv').config();
@@ -51,6 +51,7 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 /** Routes */
+app.use('/api/v1/auth', require('./routes/authRoutes'));
 app.use('/api/v1/tours', require('./routes/tourRoutes'));
 app.use('/api/v1/users', require('./routes/userRoutes'));
 app.use('/api/v1/reviews', require('./routes/reviewRoutes'));
