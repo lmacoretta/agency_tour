@@ -2,7 +2,14 @@ import axios from 'axios';
 
 import setAuthToken from '../utils/setAuthToken';
 import { AUTH_ROUTE } from '../utils/misc';
-import { REGISTER_SUCCESS, LOGIN_SUCCESS, USER_LOADED } from './type';
+import {
+  REGISTER_SUCCESS,
+  LOGIN_SUCCESS,
+  USER_LOADED,
+  REGISTER_FAIL,
+  LOGIN_FAIL,
+  LOG_OUT
+} from './type';
 
 /** Comprueba si el usuario esta logeado con el token al inicio de la aplicacion. Tambien trae la data del usuario del back end. */
 export const loadUser = () => async dispatch => {
@@ -34,9 +41,12 @@ export const signUp = data => async dispatch => {
       payload: res.data
     });
 
-    /** Tiro el alerta */
+    dispatch(loadUser());
   } catch (err) {
-    console.log(err.response.data);
+    dispatch({
+      type: REGISTER_FAIL,
+      payload: err.response.data
+    });
   }
 };
 
@@ -52,7 +62,20 @@ export const signIn = data => async dispatch => {
       type: LOGIN_SUCCESS,
       payload: res.data
     });
+
+    dispatch(loadUser());
   } catch (err) {
     console.log(err.response.data.message);
+  }
+};
+
+/** Logout user */
+export const logOut = () => async dispatch => {
+  try {
+    dispatch({
+      type: LOG_OUT
+    });
+  } catch (err) {
+    console.log(err.response.data);
   }
 };

@@ -1,8 +1,16 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-const Header = () => {
-  const isAuthenticated = false;
+import { logOut } from '../../../actions/authAction';
+
+const Header = ({ logOut, isAuthenticated }) => {
+  const logoutUser = async e => {
+    e.preventDefault();
+
+    await logOut();
+  };
 
   return (
     <Fragment>
@@ -22,7 +30,11 @@ const Header = () => {
         <nav className="nav nav--user">
           {isAuthenticated ? (
             <Fragment>
-              <Link to="#" className="nav__el nav__el--logout">
+              <Link
+                to="#"
+                className="nav__el nav__el--logout"
+                onClick={e => logoutUser(e)}
+              >
                 Logout
               </Link>
               <Link to="/me" className="nav__el">
@@ -50,4 +62,16 @@ const Header = () => {
   );
 };
 
-export default Header;
+Header.propTypes = {
+  logOut: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
+};
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(
+  mapStateToProps,
+  { logOut }
+)(Header);

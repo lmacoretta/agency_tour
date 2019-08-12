@@ -1,14 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const Register = () => {
+import { signUp } from '../../../actions/authAction';
+
+const Register = ({ signUp, isAuthenticated }) => {
+  const [formData, setFormData] = useState({
+    email: '',
+    name: '',
+    password: '',
+    passwordConfirm: ''
+  });
+
+  const { email, name, password, passwordConfirm } = formData;
+
+  const onSubmit = async e => {
+    e.preventDefault();
+
+    await signUp({ email, name, password, passwordConfirm });
+  };
+
+  const onChange = e => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  if (isAuthenticated) {
+    return <Redirect to="/login" />;
+  }
+
   return (
     <div className="login">
       <div className="login__form">
         <h2 className="heading-secundary u-margin-bottom-small">
           Crea tu cuenta!
         </h2>
-        <form className="form form--login">
+        <form className="form form--login" onSubmit={e => onSubmit(e)}>
           <div className="form-group">
             <label className="form-text">Nombre</label>
             <input
@@ -18,6 +45,8 @@ const Register = () => {
               autoComplete="off"
               required
               placeholder="Nombre"
+              value={name}
+              onChange={e => onChange(e)}
             />
           </div>
 
@@ -30,6 +59,8 @@ const Register = () => {
               autoComplete="off"
               required
               placeholder="Email"
+              value={email}
+              onChange={e => onChange(e)}
             />
           </div>
 
@@ -42,6 +73,8 @@ const Register = () => {
               placeholder="●●●●●●"
               className="form-input"
               minLength="6"
+              value={password}
+              onChange={e => onChange(e)}
             />
           </div>
 
@@ -49,23 +82,37 @@ const Register = () => {
             <label className="form-text">Confirmacion del Password</label>
             <input
               type="password"
-              name="password2"
+              name="passwordConfirm"
               required
               placeholder="●●●●●●"
               className="form-input"
               minLength="6"
+              value={passwordConfirm}
+              onChange={e => onChange(e)}
             />
           </div>
 
-          <a href="" className="btn btn--green u-margin-top-small">
-            Registrarse
-          </a>
+          <input
+            type="submit"
+            className="btn btn--green u-margin-top-small"
+            value="Registrarse"
+          />
         </form>
       </div>
     </div>
   );
 };
 
-Register.propTypes = {};
+Register.propTypes = {
+  signUp: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
+};
 
-export default Register;
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(
+  mapStateToProps,
+  { signUp }
+)(Register);

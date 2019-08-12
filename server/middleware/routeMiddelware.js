@@ -25,7 +25,7 @@ module.exports = {
     try {
       //Verifico que sea valido
       const decoded = await jwt.verify(token, process.env.SECRET);
-
+      console.log(decoded.id);
       //Busco si el usuario existe con el id del jwt.
       const currentUser = await User.findById(decoded.id);
 
