@@ -1,15 +1,15 @@
 .btn {
-  &:link,
-  &:visited {
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 1.4rem 3rem;
-    display: inline-block;
-    border-radius: 10rem;
-    transition: transform 0.3s;
-    position: relative;
-    font-weight: 700;
-  }
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1.4rem 3rem;
+  display: inline-block;
+  border-radius: 10rem;
+  transition: transform 0.3s;
+  position: relative;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  outline: none;
 
   &--green {
     color: #fff;

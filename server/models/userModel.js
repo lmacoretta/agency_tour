@@ -1,6 +1,5 @@
 const crypto = require('crypto');
 const mongoose = require('mongoose');
-const validator = require('validator');
 const brcrypt = require('bcryptjs');
 
 const { Schema } = mongoose;
@@ -16,8 +15,7 @@ const userSchema = new Schema({
     type: String,
     required: [true, 'El email es requerido'],
     unique: true,
-    lowercase: true,
-    validate: [validator.isEmail, 'Por favor, ingrese un email valido']
+    lowercase: true
   },
 
   password: {
@@ -25,18 +23,6 @@ const userSchema = new Schema({
     required: [true, 'El password es requerido'],
     minlength: [8, 'El password no puede tener menos de 6 caracteres'],
     select: false //Para que no muestre la password por ejemplo en postman.
-  },
-
-  passwordConfirm: {
-    type: String,
-    required: [true, 'Por favor, confirme su password'],
-    validate: {
-      //Esto funciona solo en el create o save, no en update por ejemplo.
-      validator: function(el) {
-        return el === this.password;
-      },
-      message: 'Los passwords no son iguales'
-    }
   },
 
   passwordChangedAt: Date,

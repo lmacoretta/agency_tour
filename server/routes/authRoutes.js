@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { signUpVal, signInVal } = require('../middleware/validMiddleware');
 
 const {
   signUp,
@@ -9,8 +10,8 @@ const {
 
 const { auth } = require('../middleware/routeMiddelware');
 
-router.post('/signup', signUp);
-router.post('/signin', signIn);
+router.post('/signup', signUpVal, signUp);
+router.post('/signin', signInVal, signIn);
 router.get('/protectUser', auth, protectUser);
 
 module.exports = router;

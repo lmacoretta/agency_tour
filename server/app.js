@@ -13,7 +13,7 @@ const { globalErrorHandler } = require('./middleware/errorMiddleware');
 /** Middleware */
 app.use(helmet()); //Helmet ayuda a proteger la aplicación de algunas vulnerabilidades web conocidas mediante el establecimiento correcto de cabeceras HTTP.
 
-app.use(express.json({ limit: '10kb' }));
+app.use(express.json({ limit: '10kb', extended: false }));
 require('dotenv').config();
 
 if (process.env.NODE_ENV === 'development') {

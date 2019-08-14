@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 /** Actions */
 import { signIn } from '../../../actions/authAction';
+import Alert from '../../Alert';
 
 const Login = ({ signIn, isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -63,6 +64,10 @@ const Login = ({ signIn, isAuthenticated }) => {
               onChange={e => handleChange(e)}
             />
             <label className="form-label">Password</label>
+          </div>
+
+          <div>
+            <Alert />
           </div>
 
           <input type="submit" className="btn btn--green" value="Ingresar" />

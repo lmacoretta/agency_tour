@@ -2,6 +2,8 @@ import axios from 'axios';
 
 import setAuthToken from '../utils/setAuthToken';
 import { AUTH_ROUTE } from '../utils/misc';
+import { setAlert } from './alertAction';
+
 import {
   REGISTER_SUCCESS,
   LOGIN_SUCCESS,
@@ -43,9 +45,14 @@ export const signUp = data => async dispatch => {
 
     dispatch(loadUser());
   } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+    }
+
     dispatch({
-      type: REGISTER_FAIL,
-      payload: err.response.data
+      type: REGISTER_FAIL
     });
   }
 };
@@ -65,7 +72,15 @@ export const signIn = data => async dispatch => {
 
     dispatch(loadUser());
   } catch (err) {
-    console.log(err.response.data.message);
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+    }
+
+    dispatch({
+      type: LOGIN_FAIL
+    });
   }
 };
 
@@ -76,6 +91,6 @@ export const logOut = () => async dispatch => {
       type: LOG_OUT
     });
   } catch (err) {
-    console.log(err.response.data);
+    console.log(err.response.data.message);
   }
 };

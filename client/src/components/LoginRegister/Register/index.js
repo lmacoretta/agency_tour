@@ -4,8 +4,12 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { signUp } from '../../../actions/authAction';
+import { setAlert } from '../../../actions/alertAction';
 
-const Register = ({ signUp, isAuthenticated }) => {
+/** Components */
+import Alert from '../../Alert';
+
+const Register = ({ signUp, setAlert, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: '',
     name: '',
@@ -18,7 +22,11 @@ const Register = ({ signUp, isAuthenticated }) => {
   const onSubmit = async e => {
     e.preventDefault();
 
-    await signUp({ email, name, password, passwordConfirm });
+    if (password !== passwordConfirm) {
+      setAlert('Los password no coinciden', 'danger');
+    } else {
+      await signUp({ email, name, password, passwordConfirm });
+    }
   };
 
   const onChange = e => {
@@ -92,6 +100,10 @@ const Register = ({ signUp, isAuthenticated }) => {
             />
           </div>
 
+          <div>
+            <Alert />
+          </div>
+
           <input
             type="submit"
             className="btn btn--green u-margin-top-small"
@@ -105,6 +117,7 @@ const Register = ({ signUp, isAuthenticated }) => {
 
 Register.propTypes = {
   signUp: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool
 };
 
@@ -114,5 +127,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { signUp }
+  { setAlert, signUp }
 )(Register);
